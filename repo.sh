@@ -96,7 +96,7 @@ fi
 if $add_flag
 then
   check_repo
-  cd apt; reprepro -Vb . includedeb $repo $add_arg
+  cd apt; reprepro --ignore=forbiddenchar -Vb . includedeb $repo ../$add_arg
 fi
 
 if $download_flag
@@ -108,7 +108,7 @@ fi
 if $upload_flag
 then
   check_repodir
-  #rsync -v -r -W apt/ pushkar7@golems.org:~/dart.golems.org/apt
+  rsync -v -r -W apt/ pushkar7@golems.org:~/dart.golems.org/apt
   # hack because you can't run reprepro on dreamhost
   ssh pushkar7@dart.golems.org "cd dart.golems.org/apt/dists; rm precise/Release.gpg; gpg -abs -o precise/Release.gpg precise/Release; rm quantal/Release.gpg; gpg -abs -o quantal/Release.gpg quantal/Release; "
 fi
